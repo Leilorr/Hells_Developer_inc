@@ -15,14 +15,14 @@ public class User {
     private String adress;
 
     public User(String name, int age, String work, String adress) {
-        if (name == null || name.isBlank())
+        if (name.isBlank())
             throw new IllegalArgumentException("Enter your name");
         if (age < 18)
-            throw new IllegalArgumentException("Enter your age");
+            throw new IllegalArgumentException("You are still young");
         if (!VALID_JOBS.contains(work))
-            throw new IllegalArgumentException("Enter your work");
+            throw new IllegalArgumentException("Invalid workplace");
         if (!VALID_ADDRESSES.contains(adress))
-            throw new IllegalArgumentException("Enter your adress");
+            throw new IllegalArgumentException("Invalid address");
 
         this.name = name;
         this.age = age;
