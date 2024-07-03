@@ -37,7 +37,11 @@ class Main {
         WeatherData weatherDataCache = weatherMap.get(city);
         if (weatherDataCache == null) {
             WeatherData cityWeatherData = WeatherRepository.getWeatherData(city);
-            weatherMap.put(city, cityWeatherData);
+            if (cityWeatherData != null) {
+                weatherMap.put(city, cityWeatherData);
+            } else {
+                System.out.println("Weather data not available for: " + city);
+            }
             return cityWeatherData;
         }
         return weatherDataCache;
@@ -46,7 +50,7 @@ class Main {
     public static WeatherData updateWeatherData(String city) {
         WeatherData cityWeatherData = weatherMap.get(city);
         if (cityWeatherData == null) {
-            System.out.println("Data not found");
+            System.out.println("Weather data not found for: " + city);
         } else {
             cityWeatherData = WeatherRepository.getWeatherData(city);
             weatherMap.put(city, cityWeatherData);
@@ -55,7 +59,9 @@ class Main {
     }
 
     public static void deleteWeatherData(String city) {
-        weatherMap.remove(city);
+        if (city != null) {
+            weatherMap.remove(city);
+        }
     }
 
     public static List<String> getAllCities() {
